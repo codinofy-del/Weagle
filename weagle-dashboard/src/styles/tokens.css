@@ -1,0 +1,44 @@
+:root {
+  --font-family-base: Inter, sans-serif;
+
+  --color-primary-100: #FBDCD0;
+  --color-primary-200: #F29A79;
+  --color-primary-300: #F07E52;
+  --color-primary-400: #F25A1F;
+  --color-primary-500: #D9531F;
+  --color-primary-600: #F4581C;
+
+  --color-text-base-primary: #131313;
+  --color-text-base-secondary: #9A9A9A;
+  --color-text-base-tertiary: #7A7A7A;
+
+  --color-background-surface-default: #FFFFFF;
+  --color-background-app: #F5F6F8;
+  --color-border-base-divider: #E4E5E9;
+
+  --color-status-success: #22C55E;
+  --color-status-warning: #FFD102;
+  --color-status-error: #FA5252;
+
+  --type-h1: 600 24px / 28px var(--font-family-base);
+  --type-h2: 600 20px / 24px var(--font-family-base);
+  --type-h3: 600 16px / 22px var(--font-family-base);
+  --type-b1: 400 14px / 150% var(--font-family-base);
+  --type-b2: 400 13px / 130% var(--font-family-base);
+
+  --space-0: 0;
+  --space-4: 4px;
+  --space-8: 8px;
+  --space-12: 12px;
+  --space-16: 16px;
+  --space-24: 24px;
+  --space-32: 32px;
+  --space-80: 80px;
+
+  --shadow-soft-tic: 1px 2px 3px rgba(19, 19, 19, 0.08);
+  --blur-soft-tic: blur(12px);
+
+  --radius-card: 16px;
+  --radius-control: 10px;
+  --radius-pill: 999px;
+}

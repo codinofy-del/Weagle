@@ -1,15 +1,16 @@
 import React from 'react'
+import { Icon } from './icons'
 
 function HeaderActions() {
   return (
     <div className="header-actions">
       <div className="header-left">
         <div className="chip">
-          <span>📅</span>
+          <Icon name="CalendarDays" />
           Nov 12, 2026
         </div>
         <div className="chip">
-          <span>🔍</span>
+          <Icon name="Search" />
           Search
         </div>
         <button className="btn-secondary">Check Rates</button>
