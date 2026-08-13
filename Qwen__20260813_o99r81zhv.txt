@@ -1,0 +1,31 @@
+CONTEXT: Weagle Admin Console (super-app ops dashboard), existing repo from
+Phase 0-1 (shell + static dashboard + mock API + RBAC). Same stack/design.
+
+PHASE 2 — INTERACTIVITY, DRILL-DOWN & ORDERS LIST PAGE
+
+1. DATE RANGE picker in dashboard header: Today / 7d / 30d / Custom. All
+   dashboard queries take the range and refetch; KPI deltas compare with the
+   previous equal period.
+2. GLOBAL SEARCH (topbar): debounced mock /search across orders (id),
+   customers (name/phone), partners (id/name); grouped dropdown with icons;
+   click navigates (order -> /orders?id=, customer -> /customers?id=,
+   partner -> /partners?id=); Enter opens first result; no-result state.
+3. DRILL-DOWNS:
+   - KPI card click -> /orders with the active range.
+   - Revenue chart bar-segment click -> /orders?service=<s>&range=<r>.
+   - Heatmap cell click -> /orders?date=<iso>.
+   - Exception row click -> /exceptions?kind=<k> (placeholder page OK, keep
+     params).
+4. ORDERS PAGE /orders: read-only table: ID, Service, Customer, Partner,
+   Amount, Created, Status. Filters: service multiselect, status multiselect,
+   date range, text q. Pagination 25/page. Row click sets ?id= and opens a
+   right drawer showing the full order object + status timestamp timeline.
+   "Export CSV" downloads the current filtered rows.
+5. URL STATE: all filters live in searchParams (shareable); browser back
+   restores previous filter state.
+
+ACCEPTANCE CRITERIA
+- Every drill-down lands on /orders with filters visibly applied.
+- Search results grouped and <300ms.
+- Filters + pagination + CSV export + drawer-via-URL all work.
+- TS strict + lint pass; no console errors. End with a self-check.

@@ -1,0 +1,43 @@
+CONTEXT: Weagle Admin Console (super-app ops dashboard). Next.js+TS strict+
+Tailwind+shadcn/ui+Recharts+TanStack Query; light theme, primary #E8663C,
+cards rounded-2xl; mock seeded data layer and RBAC already exist from Phase 0.
+Continue the existing repo.
+
+PHASE 1 — DASHBOARD PAGE (STATIC, MOCK DATA)
+
+Build /dashboard with this layout: KPI row on top; middle = map card + recent
+orders; right column = heatmap + exception queue.
+
+COMPONENTS
+1. <KpiCard title value delta sparkline>: delta arrow green-up/red-down vs
+   previous period; mini Recharts area sparkline. Cards: "Total orders
+   (today)", "GMV", "Active partners online", "Completion rate".
+2. <RevenueByServiceChart>: stacked bars, last 12 months, one series per
+   service (7), legend with service icon, tooltip with per-service values.
+3. <StaticOpsMap>: react-leaflet light tiles; static markers from mock partners
+   colored by driver status; side panel "Status overview" with live counts;
+   tabs Status | Zones | Alerts where Zones/Alerts show an empty state
+   "Coming in Phase 3".
+4. <RecentOrdersCard>: table of latest 8 orders: ID, service chip (icon+name),
+   customer, amount, relative time, status chip; "View full" button (link to
+   /orders, may 404-placeholder until Phase 2).
+5. <ActivityHeatmap>: CSS grid 7 rows (Mon-Sun) x 26 week columns, orange
+   intensity scale, hover tooltip with exact count, Less->More legend, month
+   labels.
+6. <ExceptionQueueCard>: rows for payment_failure, sla_breach, dispute,
+   partner_issue, complaint with open count + severity dot, sorted by
+   severity; "View all" link (placeholder until Phase 4).
+
+DATA & STATES
+7. Wire all cards via TanStack Query to mock GET /dashboard/summary,
+   /dashboard/revenue-by-service, /dashboard/heatmap, /orders?limit=8,
+   /exceptions?summary=true.
+8. Every card implements loading skeleton, error state with Retry, and empty
+   state; add a dev-only toggle to force error/empty for testing.
+
+ACCEPTANCE CRITERIA
+- No hardcoded numbers in components; everything from mock API.
+- Skeletons on first load; Retry works on forced error.
+- Layout matches described regions; right column stacks below at <=1280px,
+   usable at 1024px.
+- TS strict + lint pass. End with a self-check against these criteria.

@@ -1,0 +1,30 @@
+CONTEXT: Weagle Admin Console (super-app ops dashboard), existing repo from
+Phase 0-2. Same stack/design; maps via react-leaflet.
+
+PHASE 3 — LIVE OPS MAP + REALTIME
+
+1. REALTIME LAYER: <RealtimeProvider> + useRealtime() consuming WebSocket
+   /ws/ops. Mock mode: simulated server emits every 2s:
+   {type: partner_move|partner_status|order_new|order_status, payload}.
+   The UI must only talk to useRealtime() so a real WS can replace the mock.
+   On socket error: fall back to 15s polling and show a badge "Live" vs
+   "Live (polling)".
+2. MAP (route /live-ops-map):
+   - Toggle Drivers | Orders. Drivers: markers per partner colored by driver
+     status with smooth position transitions. Orders: markers per active order
+     colored by order status.
+   - Marker click -> popup: name/id, status chip, last update, "Open details"
+     link.
+   - Clustering at low zoom.
+   - On-map search: paste order/driver ID -> pan to marker + bounce.
+   - Tabs: Status (live counts), Zones (3-4 mock polygons shaded by active
+     order density), Alerts (list of issue markers; click -> pan).
+3. Dashboard map card reuses the same component in compact mode (no tabs).
+4. PERFORMANCE: memoize markers; per tick only re-render markers that changed;
+   cap mock markers at 200.
+
+ACCEPTANCE CRITERIA
+- Markers move/update without refresh; toggle, search, tabs work.
+- Dev toggle to kill the socket -> polling fallback + badge change.
+- No full-map re-render per tick (verify with React profiler or memo checks).
+- TS strict + lint pass. End with a self-check.

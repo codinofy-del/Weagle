@@ -1,0 +1,30 @@
+CONTEXT: Weagle Admin Console (super-app ops dashboard), existing repo from
+Phase 0-4. Same stack/design; RBAC + audit + mock API exist.
+
+PHASE 5 — REMAINING MODULES + PRODUCTION POLISH
+
+1. TRANSACTIONS /transactions: table id, type (payment|refund|topup|payout),
+   party, signed amount, method, time; type filter; CSV export.
+2. PAYOUTS & INVOICES: list with status chips scheduled/processing/paid;
+   finance-only action "Mark as paid" + audit.
+3. PROTECTION & CLAIMS: claims table order ref, type damaged|lost, amount,
+   status; approve/reject (ops_manager+) modal + audit.
+4. PROMOS & VOUCHERS: voucher list code, type %/fixed, value, quota used,
+   validity, status; "Create voucher" zod-validated form -> POST /vouchers
+   (same vouchers as the consumer app wallet).
+5. ANALYTICS & REPORTS: orders-by-service 12-month trend line, simple
+   retention cohort table, top merchants list; Export -> CSV (PDF stub OK).
+6. AUDIT LOG /audit (super_admin + finance read): table time, actor, action,
+   target, expandable payload JSON; filter by actor/action.
+7. DASHBOARD: "Export report" button -> CSV of current range summary + KPIs.
+8. POLISH: a11y pass (focus rings, aria-labels on icon buttons, table
+   semantics); keyboard "/" focuses global search, Esc closes drawers/modals;
+   virtualize tables >100 rows; error boundary per route; README with setup +
+   phase map; final next build + lint + typecheck.
+
+ACCEPTANCE CRITERIA
+- Every write action in the app appears in /audit with actor + payload.
+- All exports produce valid CSV.
+- RBAC matrix enforced across nav, routes and buttons.
+- Lighthouse accessibility >= 90 on dashboard; next build succeeds.
+- End with a self-check against these criteria.
