@@ -6,6 +6,7 @@ import KPIRow from './components/KPIRow'
 import MapCard from './components/MapCard'
 import ActivityPanel from './components/ActivityPanel'
 import ExceptionPanel from './components/ExceptionPanel'
+import DemoPrimitives from './components/DemoPrimitives'
 
 function App() {
   const [sidebarCollapsed, setSidebarCollapsed] = useState(false)
@@ -16,6 +17,7 @@ function App() {
       <div className="main-content">
         <Topbar />
         <HeaderActions />
+        <DemoPrimitives />
         <div className="dashboard-content">
           <div className="center-panel">
             <KPIRow />

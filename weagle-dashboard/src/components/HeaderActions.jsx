@@ -1,15 +1,16 @@
 import React from 'react'
+import { CalendarDays, Search } from 'lucide-react'
 
 function HeaderActions() {
   return (
     <div className="header-actions">
       <div className="header-left">
         <div className="chip">
-          <span>📅</span>
+          <CalendarDays size={20} strokeWidth={2} />
           Nov 12, 2026
         </div>
         <div className="chip">
-          <span>🔍</span>
+          <Search size={20} strokeWidth={2} />
           Search
         </div>
         <button className="btn-secondary">Check Rates</button>
